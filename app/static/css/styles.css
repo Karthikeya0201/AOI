@@ -1,0 +1,15 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; margin: 0; background: #0b1020; color: #e8eef9; }
+.container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+h1 { margin: 0 0 16px 0; font-size: 24px; }
+form .field { margin-bottom: 12px; }
+label { display: block; margin-bottom: 6px; color: #a8b3cf; }
+input[type="text"], input[name="part_number"], input[name="preferred_url"] { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #2c3752; background: #0f1530; color: #e8eef9; }
+input[type="file"] { width: 100%; }
+button { padding: 10px 16px; border-radius: 8px; border: 1px solid #3752a8; background: #1a2b6b; color: white; cursor: pointer; }
+button:hover { background: #22357d; }
+.card { background: #0f1530; border: 1px solid #2c3752; border-radius: 8px; padding: 12px; margin: 10px 0; }
+pre { white-space: pre-wrap; word-wrap: break-word; background: #0b1129; border: 1px solid #2c3752; padding: 8px; border-radius: 6px; }
+.verdict.pass { color: #22c55e; }
+.verdict.fail { color: #ef4444; }
+.table, table { width: 100%; border-collapse: collapse; }
+th, td { border-bottom: 1px solid #2c3752; padding: 8px; text-align: left; }

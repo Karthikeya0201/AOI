@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inspection Result</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Inspection Result - {{ part_number }}</h1>
+
+    <section>
+      <h2>Verdict</h2>
+      <p class="verdict {{ 'pass' if comparison.is_genuine else 'fail' }}">
+        {{ 'GENUINE' if comparison.is_genuine else 'POSSIBLY FAKE' }}
+        (confidence: {{ '%.2f' % comparison.confidence }})
+      </p>
+    </section>
+
+    <section>
+      <h2>OCR</h2>
+      {% for o in ocr_texts %}
+        <div class="card">
+          <div><strong>{{ o.filename }}</strong> — {{ o.engine }} / {{ o.preprocessing }}</div>
+          <pre>{{ o.text }}</pre>
+        </div>
+      {% endfor %}
+    </section>
+
+    <section>
+      <h2>Found Documents</h2>
+      <ul>
+        {% for r in search_results %}
+          <li><a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.title }}</a> (score {{ '%.2f' % r.score }})</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Extracted Marking Sections</h2>
+      {% for url, snippet in sections.items() %}
+        <div class="card">
+          <div><a href="{{ url }}" target="_blank" rel="noopener">{{ url }}</a></div>
+          <pre>{{ snippet }}</pre>
+        </div>
+      {% endfor %}
+    </section>
+
+    <section>
+      <h2>Spec & Comparison</h2>
+      <div class="card">
+        <div><strong>Hints:</strong> {{ ', '.join(marking_spec.hints) }}</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Matched</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for d in comparison.details %}
+            <tr>
+              <td><code>{{ d.pattern }}</code></td>
+              <td>{{ 'yes' if d.matched else 'no' }}</td>
+              <td>{{ '%.2f' % d.score }}</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p><a href="/">Go back</a></p>
+  </div>
+</body>
+</html>
